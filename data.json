@@ -26,10 +26,24 @@
       ]
     }
   ],
+  "categories": [
+    {
+      "name": "Khay gỗ",
+      "parent": null
+    },
+    {
+      "name": "Bàn trà",
+      "parent": null
+    },
+    {
+      "name": "Bàn ghế phòng trà",
+      "parent": null
+    }
+  ],
   "siteContent": {
     "eyebrow": "Xưởng mộc thủ công · Hưng Yên",
-    "title": "Đồ gỗ thủ công Hoàng Mộc",
-    "titleEm": "Tinh hoa từ bàn tay người thợ.",
+    "title": "Đồ Decor Hoàng Mộc",
+    "titleEm": "Tinh hoa từ Gỗ tự nhiên.",
     "desc": "Hoàng Mộc là xưởng nội thất thủ công chuyên sâu về gỗ tự nhiên, cam kết giữ trọn vẻ đẹp nguyên bản của từng thớ gỗ. Chúng tôi không dùng sơn phủ để che khuyết điểm, mà tập trung vào tay nghề thợ mộc để tạo nên sản phẩm bền vững. Mời quý khách xem mẫu và đặt mua trên Shopee.",
     "note": "Giá và tình trạng hàng cập nhật trên Shopee.",
     "trust1": "Gỗ thật, vân tự nhiên",
