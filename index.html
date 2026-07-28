@@ -36,6 +36,31 @@
   nav.cats{display:flex;gap:6px;margin-left:auto;flex-wrap:wrap}
   nav.cats button{background:none;border:1px solid transparent;color:var(--walnut-2);font-size:13.5px;font-weight:500;padding:8px 14px;border-radius:999px;transition:.18s}
   nav.cats button:hover{background:var(--cream-2)}nav.cats button.on{background:var(--walnut);color:var(--paper)}
+  .cart-btn{position:relative;background:none;border:1px solid var(--line);border-radius:999px;width:40px;height:40px;display:grid;place-items:center;font-size:16px;margin-left:10px;flex-shrink:0}
+  .cart-btn:hover{border-color:var(--gold)}
+  .cart-badge{position:absolute;top:-4px;right:-4px;background:var(--gold);color:#fff;font-size:10px;font-weight:700;border-radius:999px;min-width:17px;height:17px;display:grid;place-items:center;padding:0 3px}
+  .foot-actions{display:flex;gap:8px;flex-shrink:0}
+  .buy-cart{background:var(--paper);border:1px solid var(--walnut);color:var(--walnut);border-radius:10px;padding:11px 13px;font-size:13px;font-weight:600;white-space:nowrap}
+  .buy-cart:hover{background:var(--walnut);color:var(--paper)}
+  .cart-modal{max-width:520px;padding:30px}
+  .cart-head h2{margin:0 0 18px;font-size:28px}
+  .cart-items{display:flex;flex-direction:column;gap:14px;margin-bottom:18px;max-height:320px;overflow-y:auto}
+  .cart-item{display:flex;align-items:center;gap:12px}
+  .cart-item img{width:52px;height:52px;object-fit:cover;border-radius:8px;flex-shrink:0}
+  .ci-info{flex:1;min-width:0}
+  .ci-name{font-size:13.5px;color:var(--walnut);font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .ci-price{font-size:12.5px;color:var(--walnut-soft)}
+  .ci-qty{display:flex;align-items:center;gap:8px;font-size:13px;flex-shrink:0}
+  .ci-qty button{width:24px;height:24px;border:1px solid var(--line);border-radius:6px;background:var(--paper);color:var(--walnut-2)}
+  .ci-qty button:hover{border-color:var(--gold);color:var(--gold)}
+  .ci-del{background:none;border:none;color:var(--walnut-soft);font-size:16px;flex-shrink:0}
+  .ci-del:hover{color:#c0392b}
+  .cart-total{display:flex;justify-content:space-between;align-items:center;font-size:15px;color:var(--walnut);padding:14px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-bottom:18px}
+  .cart-empty{text-align:center;padding:30px 0;color:var(--walnut-soft)}
+  .cart-empty p{margin-bottom:16px}
+  .cart-ok{text-align:center;padding:20px 6px}
+  .cart-ok .ic{font-size:40px;margin-bottom:10px}
+  .cart-ok p{color:var(--walnut-soft);margin:10px 0 22px;line-height:1.7}
   .hero{position:relative;padding:74px 0 54px;overflow:hidden}
   .hero .grain{position:absolute;inset:0;opacity:.5;pointer-events:none}
   .hero-layout{display:block;position:relative}
@@ -173,6 +198,23 @@
   .minibtn{border:1px solid var(--line);background:var(--paper);border-radius:8px;padding:8px 12px;font-size:12.5px;font-weight:500;color:var(--walnut-2)}
   .minibtn:hover{border-color:var(--gold);color:var(--gold)}
   .minibtn.del:hover{border-color:#c0392b;color:#c0392b}
+  .ordlist{display:flex;flex-direction:column}
+  .ordrow{padding:16px 4px;border-bottom:1px solid var(--line)}
+  .ordrow:last-child{border-bottom:none}
+  .ordrow .ohead{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:8px}
+  .ordrow .oid{font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:var(--walnut)}
+  .ordrow .odate{font-size:11.5px;color:var(--walnut-soft)}
+  .ordrow .ocust{font-size:13.5px;color:var(--walnut-2);margin-bottom:8px;line-height:1.6}
+  .ordrow .ocust b{color:var(--walnut)}
+  .ordrow .oitems{font-size:12.5px;color:var(--walnut-soft);margin-bottom:8px}
+  .ordrow .ototal{font-weight:600;color:var(--walnut)}
+  .ordrow .ofoot{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .ostatus{font-size:11px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;padding:4px 10px;border-radius:999px}
+  .ostatus.s-moi{background:rgba(180,131,43,.15);color:var(--gold)}
+  .ostatus.s-lienhe{background:rgba(92,70,50,.12);color:var(--walnut-2)}
+  .ostatus.s-giao{background:rgba(108,122,76,.15);color:var(--moss-2)}
+  .ostatus.s-xong{background:rgba(108,122,76,.28);color:var(--moss-2)}
+  .ostatus.s-huy{background:rgba(163,51,51,.14);color:#a33}
   .aibtn{display:inline-flex;align-items:center;gap:6px;border:1px solid rgba(180,131,43,.4);background:rgba(180,131,43,.08);color:var(--gold);border-radius:8px;padding:6px 11px;font-size:12px;font-weight:600;margin:6px 0 0}
   .aibtn:hover{background:rgba(180,131,43,.16)}
   .aibtn:disabled{opacity:.55;pointer-events:none}
@@ -204,6 +246,7 @@
   <header class="site"><div class="wrap bar">
     <a class="brand" href="#" onclick="event.preventDefault();setCat('all')"><span class="mark">Hoàng Mộc</span><span class="sub">Interior</span></a>
     <nav class="cats" id="navCats" aria-label="Danh mục sản phẩm"></nav>
+    <button class="cart-btn" onclick="openCart()" aria-label="Giỏ hàng">🛒<span class="cart-badge hidden" id="cartCount">0</span></button>
   </div></header>
 
   <section class="hero">
@@ -274,6 +317,13 @@
   </div></div>
 
   <div class="wrap admin-body">
+    <!-- đơn hàng -->
+    <div class="panel">
+      <h3>Đơn hàng <span class="mono" style="font-size:14px;color:var(--walnut-soft)" id="ordTotal"></span></h3>
+      <p class="lead">Đơn khách đặt trực tiếp trên web (thanh toán COD — khi nhận hàng). Lưu riêng, không nằm trong repo công khai. <button class="minibtn" onclick="loadOrders()">↻ Tải lại</button></p>
+      <div class="ordlist" id="ordList"></div>
+    </div>
+
     <!-- nội dung trang -->
     <div class="panel">
       <h3>Nội dung trang</h3>
@@ -396,22 +446,27 @@
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 <div id="modalMount"></div>
+<div id="cartMount"></div>
 
 <script>
 "use strict";
 const CACHE='hoangmoc_cache_v2';
 const GHKEY='hoangmoc_gh';
 const AUTHKEY='hoangmoc_admin_auth';
+const CARTKEY='hoangmoc_cart';
 let state={products:[],categories:[],siteContent:{},settings:{shopee:'',tiktok:'',facebook:'',maxDim:1400,quality:0.82}};
 let draftImages=[];   // {data(dataURL|path), w,h,kb, cover, isNew}
 let draftHeroImage=null; // {data,w,h,kb} khi chọn ảnh hero mới, null nếu giữ nguyên
 let editingId=null, curCat='all';
+let cart=[]; // [{id,qty}]
 function authToken(){return sessionStorage.getItem(AUTHKEY)||'';}
+function parsePriceVN(s){const d=String(s||'').replace(/[^\d]/g,'');return d?parseInt(d,10):0;}
+function fmtVND(n){return n.toLocaleString('vi-VN')+'₫';}
 
 /* ---------- tải dữ liệu ---------- */
 async function boot(){
   document.getElementById('yr').textContent=new Date().getFullYear();
-  loadGHform();updateConn();initDrop();
+  loadGHform();updateConn();initDrop();loadCart();
   document.getElementById('gatePass').addEventListener('keydown',e=>{if(e.key==='Enter')checkAdminPass();});
   try{
     const r=await fetch('./data.json?t='+Date.now());
@@ -487,26 +542,113 @@ function renderGrid(){
   grid.innerHTML=items.map(p=>{
     const img=(p.images&&p.images[0])||ph('#7A5E44');
     const buy=p.url?`<a class="buy" href="${esc(p.url)}" target="_blank" rel="noopener">Mua trên Shopee →</a>`:`<span class="buy disabled">Sắp có trên Shopee</span>`;
+    const addCart=parsePriceVN(p.price)>0?`<button class="buy-cart" onclick="addToCart('${p.id}')">+ Giỏ</button>`:'';
     return `<article class="card"><div class="imgwrap" onclick="openModal('${p.id}')">${p.feat?'<span class="feat">Nổi bật</span>':''}<img src="${esc(img)}" alt="${esc(p.name)}" loading="lazy"></div>
       <div class="body">${p.cat?`<span class="tag">${esc(p.cat)}</span>`:''}<h3 onclick="openModal('${p.id}')">${esc(p.name)}</h3>
       <p class="desc">${esc(p.desc||'')}</p>
-      <div class="foot"><span class="price mono">${p.price?esc(p.price):`<span class="muted">${p.url?'Xem trên Shopee':'Sắp cập nhật giá'}</span>`}</span>${buy}</div></div></article>`;
+      <div class="foot"><span class="price mono">${p.price?esc(p.price):`<span class="muted">${p.url?'Xem trên Shopee':'Sắp cập nhật giá'}</span>`}</span><div class="foot-actions">${addCart}${buy}</div></div></div></article>`;
   }).join('');
 }
 function openModal(id){
   const p=state.products.find(x=>x.id===id);if(!p)return;
   const imgs=(p.images&&p.images.length)?p.images:[ph('#7A5E44')];
   const buy=p.url?`<a class="btn-solid" style="background:#EE4D2D" href="${esc(p.url)}" target="_blank" rel="noopener">Mua trên Shopee →</a>`:`<span class="btn-solid" style="background:var(--cream-2);color:var(--walnut-soft)">Sắp có trên Shopee</span>`;
+  const addCart=parsePriceVN(p.price)>0?`<button class="btn-solid" style="background:var(--paper);color:var(--walnut);border:1px solid var(--walnut)" onclick="addToCart('${p.id}')">+ Thêm vào giỏ</button>`:'';
   document.getElementById('modalMount').innerHTML=`<div class="overlay" onclick="if(event.target===this)closeModal()"><div class="modal" style="position:relative">
     <button class="close" onclick="closeModal()" aria-label="Đóng">×</button><div class="top">
     <div class="gallery"><div class="main"><img id="mMain" src="${esc(imgs[0])}" alt="${esc(p.name)}"></div>
     ${imgs.length>1?`<div class="thumbs">${imgs.map((im,i)=>`<img src="${esc(im)}" class="${i===0?'on':''}" onclick="swapMain(this,this.src)" alt="Ảnh ${i+1} của ${esc(p.name)}">`).join('')}</div>`:''}</div>
     <div class="info">${p.cat?`<span class="tag">${esc(p.cat)}</span>`:''}<h2 class="serif">${esc(p.name)}</h2>
     <div class="price mono">${p.price?esc(p.price):(p.url?'Giá & tồn kho cập nhật trên Shopee':'Sắp cập nhật giá')}</div>
-    <div class="full">${esc(p.desc||'')}</div>${buy}</div></div></div></div>`;
+    <div class="full">${esc(p.desc||'')}</div><div style="display:flex;gap:10px;flex-wrap:wrap">${addCart}${buy}</div></div></div></div>`;
 }
 function swapMain(el,src){document.getElementById('mMain').src=src;el.parentElement.querySelectorAll('img').forEach(t=>t.classList.remove('on'));el.classList.add('on');}
 function closeModal(){document.getElementById('modalMount').innerHTML='';}
+
+/* ---------- giỏ hàng & đặt hàng (COD) ---------- */
+function loadCart(){try{cart=JSON.parse(localStorage.getItem(CARTKEY))||[];}catch(e){cart=[];}updateCartBadge();}
+function saveCart(){localStorage.setItem(CARTKEY,JSON.stringify(cart));updateCartBadge();}
+function updateCartBadge(){const n=cart.reduce((s,i)=>s+i.qty,0);const el=document.getElementById('cartCount');if(!el)return;el.textContent=n;el.classList.toggle('hidden',n===0);}
+function addToCart(id){
+  const p=state.products.find(x=>x.id===id);if(!p)return;
+  if(parsePriceVN(p.price)<=0){toast('Sản phẩm này chưa có giá để đặt trên web — vui lòng mua trên Shopee','err');return;}
+  const existing=cart.find(i=>i.id===id);
+  if(existing)existing.qty=Math.min(99,existing.qty+1);else cart.push({id,qty:1});
+  saveCart();toast('Đã thêm vào giỏ ✓','ok');
+}
+function setCartQty(id,qty){
+  qty=Math.max(0,Math.min(99,qty));
+  const it=cart.find(i=>i.id===id);if(!it)return;
+  if(qty===0)cart=cart.filter(i=>i.id!==id);else it.qty=qty;
+  saveCart();renderCart();
+}
+function removeFromCart(id){cart=cart.filter(i=>i.id!==id);saveCart();renderCart();}
+function cartItemsResolved(){
+  return cart.map(i=>{
+    const p=state.products.find(x=>x.id===i.id);if(!p)return null;
+    return {id:i.id,name:p.name,price:parsePriceVN(p.price),qty:i.qty,img:(p.images&&p.images[0])||ph('#7A5E44')};
+  }).filter(Boolean);
+}
+function openCart(){renderCart();}
+function closeCart(){document.getElementById('cartMount').innerHTML='';}
+function renderCart(){
+  const items=cartItemsResolved();
+  const total=items.reduce((s,i)=>s+i.price*i.qty,0);
+  let body;
+  if(!items.length){
+    body=`<div class="cart-empty"><p>Giỏ hàng đang trống.</p><a class="btn-solid" href="#catalogue" onclick="closeCart()">Xem bộ sưu tập →</a></div>`;
+  }else{
+    body=`<div class="cart-items">${items.map(i=>`<div class="cart-item">
+        <img src="${esc(i.img)}" alt="">
+        <div class="ci-info"><div class="ci-name">${esc(i.name)}</div><div class="ci-price mono">${fmtVND(i.price)}</div></div>
+        <div class="ci-qty"><button onclick="setCartQty('${i.id}',${i.qty-1})" aria-label="Giảm số lượng">−</button><span>${i.qty}</span><button onclick="setCartQty('${i.id}',${i.qty+1})" aria-label="Tăng số lượng">+</button></div>
+        <button class="ci-del" onclick="removeFromCart('${i.id}')" aria-label="Xóa khỏi giỏ">×</button>
+      </div>`).join('')}</div>
+      <div class="cart-total">Tổng cộng <b class="mono">${fmtVND(total)}</b></div>
+      <form id="checkoutForm" onsubmit="submitOrder(event)">
+        <div class="field"><label>Họ tên người nhận</label><input class="input" id="ckName" required></div>
+        <div class="field"><label>Số điện thoại</label><input class="input" id="ckPhone" type="tel" required></div>
+        <div class="field"><label>Địa chỉ giao hàng</label><textarea class="textarea" id="ckAddress" style="min-height:70px" required></textarea></div>
+        <div class="field"><label>Ghi chú <span class="opt">(tùy chọn)</span></label><input class="input" id="ckNote"></div>
+        <div class="callout" style="margin:6px 0 16px">Thanh toán khi nhận hàng (COD). Xưởng sẽ gọi điện xác nhận trước khi giao.</div>
+        <button class="btn-solid" type="submit" style="width:100%;justify-content:center" id="ckSubmitBtn">Đặt hàng (COD) — ${fmtVND(total)}</button>
+      </form>`;
+  }
+  document.getElementById('cartMount').innerHTML=`<div class="overlay" onclick="if(event.target===this)closeCart()"><div class="modal cart-modal" style="position:relative">
+    <button class="close" onclick="closeCart()" aria-label="Đóng">×</button>
+    <div class="cart-head"><h2 class="serif">Giỏ hàng</h2></div>
+    ${body}
+  </div></div>`;
+}
+async function submitOrder(e){
+  e.preventDefault();
+  const items=cartItemsResolved();if(!items.length)return;
+  const btn=document.getElementById('ckSubmitBtn');const old=btn.textContent;btn.disabled=true;btn.textContent='Đang gửi đơn…';
+  const payload={
+    items:items.map(i=>({id:i.id,qty:i.qty})),
+    customer:{
+      name:document.getElementById('ckName').value.trim(),
+      phone:document.getElementById('ckPhone').value.trim(),
+      address:document.getElementById('ckAddress').value.trim(),
+      note:document.getElementById('ckNote').value.trim(),
+    },
+  };
+  try{
+    const r=await fetch('/api/create-order',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+    const d=await r.json().catch(()=>({}));
+    if(!r.ok)throw new Error(d.error||'Lỗi đặt hàng, thử lại.');
+    cart=[];saveCart();
+    document.getElementById('cartMount').innerHTML=`<div class="overlay" onclick="closeCart()"><div class="modal cart-modal" style="position:relative">
+      <button class="close" onclick="closeCart()" aria-label="Đóng">×</button>
+      <div class="cart-ok"><div class="ic">✓</div><h2 class="serif">Đặt hàng thành công</h2>
+      <p>Mã đơn: <b class="mono">${esc(d.orderId)}</b><br>Xưởng sẽ gọi điện xác nhận trước khi giao. Cảm ơn bạn đã ủng hộ Hoàng Mộc.</p>
+      <button class="btn-solid" onclick="closeCart()">Đóng</button></div>
+    </div></div>`;
+  }catch(err){
+    toast(err.message,'err');
+    btn.disabled=false;btn.textContent=old;
+  }
+}
 
 /* ---------- chuyển đổi giao diện ---------- */
 function showAdmin(){
@@ -548,7 +690,60 @@ async function checkAdminPass(){
 }
 function adminLogout(){sessionStorage.removeItem(AUTHKEY);history.replaceState(null,'','#');showSite();toast('Đã đăng xuất khu quản trị','ok');}
 function showSite(){document.getElementById('admin').classList.add('hidden');document.getElementById('adminGate').classList.add('hidden');document.getElementById('site').classList.remove('hidden');if(location.hash.replace('#','')==='admin')history.replaceState(null,'','#');renderNav();renderGrid();applyPublicSettings();applySiteContent();}
-function renderAdmin(){fillSettings();fillContentForm();renderHeroThumb();renderCatList();renderCatParentSelect();renderCategoryPanel();renderPlist();updateConn();}
+function renderAdmin(){fillSettings();fillContentForm();renderHeroThumb();renderCatList();renderCatParentSelect();renderCategoryPanel();renderPlist();updateConn();loadOrders();}
+let ordersCache=[];
+async function loadOrders(){
+  const box=document.getElementById('ordList');
+  box.innerHTML=`<p style="color:var(--walnut-soft);font-size:13.5px">Đang tải…</p>`;
+  try{
+    const r=await fetch('/api/orders',{headers:{'Authorization':'Bearer '+authToken()}});
+    const d=await r.json().catch(()=>({}));
+    if(!r.ok){
+      if(r.status===401){adminLogout();return;}
+      box.innerHTML=`<p style="color:#a33;font-size:13.5px">${esc(d.error||'Lỗi tải đơn hàng')}</p>`;
+      document.getElementById('ordTotal').textContent='';
+      return;
+    }
+    ordersCache=d.orders||[];
+    renderOrders();
+  }catch(e){
+    box.innerHTML=`<p style="color:#a33;font-size:13.5px">Lỗi mạng khi tải đơn hàng.</p>`;
+  }
+}
+function statusClass(s){
+  return {'Mới':'s-moi','Đã liên hệ':'s-lienhe','Đang giao':'s-giao','Đã giao':'s-xong','Đã hủy':'s-huy'}[s]||'s-moi';
+}
+function renderOrders(){
+  const box=document.getElementById('ordList');
+  document.getElementById('ordTotal').textContent=ordersCache.length?'· '+ordersCache.length:'';
+  if(!ordersCache.length){box.innerHTML=`<p style="color:var(--walnut-soft);font-size:14px">Chưa có đơn hàng nào.</p>`;return;}
+  const STATUSES=['Mới','Đã liên hệ','Đang giao','Đã giao','Đã hủy'];
+  box.innerHTML=ordersCache.map(o=>{
+    const date=new Date(o.createdAt).toLocaleString('vi-VN');
+    const itemsTxt=o.items.map(it=>`${esc(it.name)} ×${it.qty}`).join(', ');
+    return `<div class="ordrow">
+      <div class="ohead"><span class="oid">${esc(o.id)}</span><span class="odate">${date}</span></div>
+      <div class="ocust"><b>${esc(o.customer.name)}</b> · ${esc(o.customer.phone)}<br>${esc(o.customer.address)}${o.customer.note?'<br>Ghi chú: '+esc(o.customer.note):''}</div>
+      <div class="oitems">${itemsTxt} — <span class="ototal mono">${fmtVND(o.total)}</span></div>
+      <div class="ofoot">
+        <span class="ostatus ${statusClass(o.status)}">${esc(o.status)}</span>
+        <select class="input" style="width:auto;padding:6px 10px;font-size:12.5px" onchange="updateOrderStatus('${o.id}',this.value)">
+          ${STATUSES.map(s=>`<option value="${s}" ${s===o.status?'selected':''}>${s}</option>`).join('')}
+        </select>
+      </div>
+    </div>`;
+  }).join('');
+}
+async function updateOrderStatus(orderId,status){
+  try{
+    const r=await fetch('/api/orders',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+authToken()},body:JSON.stringify({action:'updateStatus',orderId,status})});
+    const d=await r.json().catch(()=>({}));
+    if(!r.ok)throw new Error(d.error||'Lỗi cập nhật trạng thái');
+    const o=ordersCache.find(x=>x.id===orderId);if(o)o.status=status;
+    renderOrders();
+    toast('Đã cập nhật trạng thái đơn hàng ✓','ok');
+  }catch(e){toast(e.message,'err');}
+}
 function applySiteContent(){
   const c={...DEFAULT_CONTENT,...state.siteContent};
   document.getElementById('hcEyebrow').textContent=c.eyebrow;
@@ -915,7 +1110,7 @@ function initDrop(){
   wireDropzone('heroDrop','heroFileInput',handleHeroFile);
   window.addEventListener('dragover',e=>e.preventDefault());window.addEventListener('drop',e=>e.preventDefault());
 }
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal();closeCart();}});
 window.addEventListener('hashchange',()=>{if(location.hash.replace('#','')==='admin')showAdmin();});
 boot();
 </script>
