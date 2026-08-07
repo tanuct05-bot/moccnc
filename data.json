@@ -1,6 +1,19 @@
 {
   "products": [
     {
+      "id": "pmsib14btd9k0",
+      "name": "Tranh chữ Tâm - dát vàng",
+      "cat": "Tranh Gỗ",
+      "price": "",
+      "url": "",
+      "desc": "Tranh chữ Tâm được chế tác thủ công từ gỗ tự nhiên, dát vàng tinh xảo, không sơn phủ, giữ nguyên vẻ đẹp mộc mạc của vân gỗ. Kích thước tiêu chuẩn 60x60cm, phù hợp trang trí mọi không gian. Sản phẩm được bán chính hãng trên Shopee.",
+      "feat": true,
+      "images": [
+        "images/pmsib14btd9k0-msib2ajl094v.jpg",
+        "images/pmsib14btd9k0-msib2ciy1el6.jpg"
+      ]
+    },
+    {
       "id": "pmrd7ycoh4czz",
       "name": "Khay gỗ óc chó chữ nhật",
       "cat": "Khay gỗ",
