@@ -158,8 +158,6 @@
   .abtn.primary{background:var(--gold);border-color:var(--gold);color:#fff}
   .abtn.primary:hover{background:var(--gold-2)}
   .abtn.danger:hover{background:#a33;border-color:#a33}
-  .conn{display:inline-flex;align-items:center;gap:7px;font-size:12px;color:rgba(246,239,226,.7);margin-right:4px}
-  .dot{width:9px;height:9px;border-radius:999px;background:#c0563a}.dot.on{background:#7fae54}
   .field{margin-bottom:18px;text-align:left}
   .field label{display:block;font-size:12px;font-weight:600;letter-spacing:.5px;color:var(--walnut-2);margin-bottom:7px;text-transform:uppercase}
   .field label .opt{color:var(--walnut-soft);text-transform:none;font-weight:400;letter-spacing:0}
@@ -310,7 +308,6 @@
   <div class="admin-top"><div class="wrap bar">
     <span class="mark">Mộc CNC</span><span class="tag">Quản trị</span>
     <div class="tools">
-      <span class="conn"><span class="dot" id="connDot"></span><span id="connLabel">Chưa kết nối</span></span>
       <button class="abtn primary" onclick="publish()">⬆ Đăng lên GitHub</button>
       <button class="abtn" onclick="reloadFromGit()">↻ Tải lại</button>
       <button class="abtn" onclick="showSite()">← Xem trang</button>
@@ -413,22 +410,6 @@
       <div class="plist" id="plist"></div>
     </div>
 
-    <!-- github + cài đặt -->
-    <div class="panel">
-      <h3>Kết nối GitHub</h3>
-      <p class="lead">Chỉ cần điền một lần trên máy bạn. Token lưu trong trình duyệt của bạn, <b>không</b> bị đăng lên web.</p>
-      <div class="callout">
-        Lấy token: GitHub → <b>Settings → Developer settings → Personal access tokens → Fine-grained tokens → Generate new token</b>. Chọn đúng repo chứa web, phần <b>Repository permissions → Contents</b> đặt <code>Read and write</code>. Dán token vào ô bên dưới. Chỉ thực hiện trên máy tính cá nhân — không đăng nhập/dán token trên máy công cộng.
-      </div>
-      <div class="form-grid">
-        <div class="field"><label>Tên chủ repo (username)</label><input class="input" id="ghOwner" placeholder="vd: tannguyen"></div>
-        <div class="field"><label>Tên repo</label><input class="input" id="ghRepo" placeholder="vd: moccnc"></div>
-        <div class="field"><label>Nhánh (branch)</label><input class="input" id="ghBranch" placeholder="main"></div>
-        <div class="field"><label>Token <span class="opt">(fine-grained, chỉ repo này, quyền Contents)</span></label><input class="input" id="ghToken" type="password" placeholder="github_pat_…"></div>
-      </div>
-      <div class="form-actions"><button class="abtn primary" onclick="saveGHform();testGH()">Kiểm tra & lưu kết nối</button></div>
-    </div>
-
     <div class="panel">
       <h3>Cài đặt trang</h3>
       <div class="field" style="max-width:460px"><label>Link gian hàng Shopee (footer)</label><input class="input" id="sShop" placeholder="https://shopee.vn/moccnc"></div>
@@ -454,7 +435,6 @@
 <script>
 "use strict";
 const CACHE='moccnc_cache_v2';
-const GHKEY='moccnc_gh';
 const AUTHKEY='moccnc_admin_auth';
 const CARTKEY='moccnc_cart';
 let state={products:[],categories:[],siteContent:{},settings:{shopee:'',tiktok:'',facebook:'',maxDim:1400,quality:0.82}};
@@ -469,7 +449,7 @@ function fmtVND(n){return n.toLocaleString('vi-VN')+'₫';}
 /* ---------- tải dữ liệu ---------- */
 async function boot(){
   document.getElementById('yr').textContent=new Date().getFullYear();
-  loadGHform();updateConn();initDrop();loadCart();
+  initDrop();loadCart();
   document.getElementById('gatePass').addEventListener('keydown',e=>{if(e.key==='Enter')checkAdminPass();});
   try{
     const r=await fetch('./data.json?t='+Date.now());
@@ -693,7 +673,7 @@ async function checkAdminPass(){
 }
 function adminLogout(){sessionStorage.removeItem(AUTHKEY);history.replaceState(null,'','#');showSite();toast('Đã đăng xuất khu quản trị','ok');}
 function showSite(){document.getElementById('admin').classList.add('hidden');document.getElementById('adminGate').classList.add('hidden');document.getElementById('site').classList.remove('hidden');if(location.hash.replace('#','')==='admin')history.replaceState(null,'','#');renderNav();renderGrid();applyPublicSettings();applySiteContent();}
-function renderAdmin(){fillSettings();fillContentForm();renderHeroThumb();renderCatList();renderCatParentSelect();renderCategoryPanel();renderPlist();updateConn();loadOrders();}
+function renderAdmin(){fillSettings();fillContentForm();renderHeroThumb();renderCatList();renderCatParentSelect();renderCategoryPanel();renderPlist();loadOrders();}
 let ordersCache=[];
 async function loadOrders(){
   const box=document.getElementById('ordList');
@@ -1024,30 +1004,14 @@ function applyPublicSettings(){
 }
 function setFooterLink(id,url){const el=document.getElementById(id);if(url){el.href=url;el.classList.remove('hidden');}else{el.classList.add('hidden');}}
 
-/* ---------- kết nối GitHub ---------- */
-function getGH(){try{return JSON.parse(localStorage.getItem(GHKEY))||{};}catch(e){return {};}}
-function loadGHform(){const g=getGH();document.getElementById('ghOwner').value=g.owner||'';document.getElementById('ghRepo').value=g.repo||'';document.getElementById('ghBranch').value=g.branch||'main';document.getElementById('ghToken').value=g.token||'';}
-function saveGHform(){const g={owner:document.getElementById('ghOwner').value.trim(),repo:document.getElementById('ghRepo').value.trim(),branch:document.getElementById('ghBranch').value.trim()||'main',token:document.getElementById('ghToken').value.trim()};localStorage.setItem(GHKEY,JSON.stringify(g));updateConn();}
-function updateConn(){const g=getGH();const ok=g.owner&&g.repo&&g.token;
-  document.getElementById('connDot').className='dot'+(ok?' on':'');
-  document.getElementById('connLabel').textContent=ok?g.owner+'/'+g.repo:'Chưa kết nối';}
-async function testGH(){const g=getGH();if(!g.owner||!g.repo||!g.token){toast('Điền đủ owner / repo / token','err');return;}
-  try{const r=await fetch(`https://api.github.com/repos/${g.owner}/${g.repo}`,{headers:ghHeaders()});
-    if(r.ok){const d=await r.json();const canPush=d.permissions&&d.permissions.push;toast(canPush?'Kết nối OK — ghi được ✓':'Kết nối được nhưng token CHỈ ĐỌC — sửa quyền Contents',canPush?'ok':'err');}
-    else if(r.status===404)toast('Không thấy repo — kiểm tra owner/repo','err');
-    else if(r.status===401)toast('Token sai hoặc hết hạn','err');
-    else toast('Lỗi kết nối ('+r.status+')','err');
-  }catch(e){toast('Lỗi mạng khi kết nối GitHub','err');}}
-function ghHeaders(){return {Authorization:'Bearer '+getGH().token,Accept:'application/vnd.github+json'};}
-async function ghGet(path){const g=getGH();const r=await fetch(`https://api.github.com/repos/${g.owner}/${g.repo}/contents/${path}?ref=${g.branch}`,{headers:ghHeaders()});if(r.status===404)return null;if(!r.ok)throw new Error('Đọc '+path+' lỗi '+r.status);return r.json();}
-async function ghPut(path,contentB64,message,sha){const g=getGH();const body={message,content:contentB64,branch:g.branch};if(sha)body.sha=sha;
-  const r=await fetch(`https://api.github.com/repos/${g.owner}/${g.repo}/contents/${path}`,{method:'PUT',headers:{...ghHeaders(),'Content-Type':'application/json'},body:JSON.stringify(body)});
-  if(!r.ok){let t='';try{t=(await r.json()).message||'';}catch(e){}throw new Error(path+': '+r.status+' '+t);}return r.json();}
-function b64utf8(s){return btoa(unescape(encodeURIComponent(s)));}
-
-/* ---------- đăng bản mới ---------- */
+/* ---------- đăng bản mới (server tự đăng lên GitHub, không cần token trình duyệt) ---------- */
+async function publishImage(path,contentBase64){
+  const r=await fetch('/api/publish-image',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+authToken()},body:JSON.stringify({path,contentBase64})});
+  const d=await r.json().catch(()=>({}));
+  if(!r.ok){if(r.status===401)adminLogout();throw new Error(d.error||('Lỗi tải ảnh ('+r.status+')'));}
+  return d;
+}
 async function publish(){
-  const g=getGH();if(!g.owner||!g.repo||!g.token){toast('Chưa kết nối GitHub — cuộn xuống phần "Kết nối GitHub"','err');return;}
   const btnMsg=(m)=>toast(m);
   try{
     let uploaded=0;
@@ -1059,7 +1023,7 @@ async function publish(){
           const b64=im.split(',')[1];
           const path='images/'+p.id+'-'+Date.now().toString(36)+i+Math.random().toString(36).slice(2,5)+'.jpg';
           btnMsg('Đang tải ảnh '+(uploaded+1)+'…');
-          await ghPut(path,b64,'add image '+path,null);
+          await publishImage(path,b64);
           out.push(path);uploaded++;
         }else out.push(im);
       }
@@ -1069,26 +1033,26 @@ async function publish(){
       const b64=state.siteContent.heroImage.split(',')[1];
       const path='images/hero-'+Date.now().toString(36)+'.jpg';
       btnMsg('Đang tải ảnh hero…');
-      await ghPut(path,b64,'add hero image '+path,null);
+      await publishImage(path,b64);
       state.siteContent.heroImage=path;draftHeroImage=null;
     }
     btnMsg('Đang cập nhật danh mục…');
     const publicState={products:state.products,categories:state.categories,siteContent:state.siteContent,settings:{shopee:state.settings.shopee,tiktok:state.settings.tiktok,facebook:state.settings.facebook,maxDim:state.settings.maxDim,quality:state.settings.quality}};
-    const json=JSON.stringify(publicState,null,2);
-    const existing=await ghGet('data.json');
-    await ghPut('data.json',b64utf8(json),'update catalogue',existing?existing.sha:null);
+    const r=await fetch('/api/publish-data',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+authToken()},body:JSON.stringify(publicState)});
+    const d=await r.json().catch(()=>({}));
+    if(!r.ok){if(r.status===401)adminLogout();throw new Error(d.error||('Lỗi cập nhật ('+r.status+')'));}
     cacheLocal();renderAdmin();
     toast('Đã đăng lên GitHub — trang cập nhật sau ~30–60 giây','ok');
   }catch(e){toast('Lỗi đăng: '+e.message,'err');}
 }
 async function reloadFromGit(){
   if((editingId||draftImages.length)&&!confirm('Form đang có nội dung chưa lưu — tải lại sẽ mất các thay đổi này. Tiếp tục?'))return;
-  const g=getGH();
   try{
-    if(g.owner&&g.repo&&g.token){
-      const f=await ghGet('data.json');
-      if(f){state=normalize(JSON.parse(decodeURIComponent(escape(atob(f.content.replace(/\s/g,''))))));cacheLocal();renderAdmin();toast('Đã tải bản mới nhất từ GitHub ✓','ok');return;}
-    }
+    const r=await fetch('/api/publish-data',{headers:{'Authorization':'Bearer '+authToken()}});
+    if(r.ok){state=normalize(await r.json());cacheLocal();renderAdmin();toast('Đã tải bản mới nhất từ GitHub ✓','ok');return;}
+    if(r.status===401){adminLogout();return;}
+  }catch(e){}
+  try{
     const r=await fetch('./data.json?t='+Date.now());if(r.ok){state=normalize(await r.json());cacheLocal();renderAdmin();toast('Đã tải lại ✓','ok');}else toast('Chưa có data.json để tải','err');
   }catch(e){toast('Lỗi tải lại: '+e.message,'err');}
 }
