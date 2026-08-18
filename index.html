@@ -15,7 +15,7 @@
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Be+Vietnam+Pro:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Jura:wght@300;400;500;600;700&family=Charmonman:wght@400;700&display=swap" rel="stylesheet">
 <style>
   :root{
     --cream:#F6EFE2;--cream-2:#EFE5D3;--paper:#FBF6EC;
@@ -25,16 +25,17 @@
     --shadow:0 1px 2px rgba(59,42,28,.06),0 12px 34px -18px rgba(59,42,28,.30);--radius:14px;
   }
   *{box-sizing:border-box}html{scroll-behavior:smooth}
-  body{margin:0;background:var(--cream);color:var(--ink);font-family:'Be Vietnam Pro',system-ui,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
-  h1,h2,h3,.serif{font-family:'Cormorant Garamond',Georgia,serif}
-  .mono{font-family:'IBM Plex Mono',monospace}
+  body{margin:0;background:var(--cream);color:var(--ink);font-family:'Jura',system-ui,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+  h1,h2,h3,.serif{font-family:'Jura',system-ui,sans-serif;font-weight:600}
+  .mono{font-family:'Jura',system-ui,sans-serif;font-variant-numeric:tabular-nums}
+  .script{font-family:'Charmonman',cursive;font-weight:700;font-style:normal;line-height:1.3}
   a{color:inherit}button{font-family:inherit;cursor:pointer}img{display:block;max-width:100%}
   .hidden{display:none !important}
   .wrap{max-width:1180px;margin:0 auto;padding:0 22px}
   header.site{position:sticky;top:0;z-index:40;background:rgba(246,239,226,.88);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
   .bar{display:flex;align-items:center;gap:18px;height:70px}
   .brand{display:flex;align-items:baseline;gap:10px;text-decoration:none}
-  .brand .mark{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:30px;color:var(--walnut);line-height:1}
+  .brand .mark{font-family:'Jura',sans-serif;font-weight:700;letter-spacing:.5px;font-size:26px;color:var(--walnut);line-height:1}
   .brand .sub{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);font-weight:600}
   nav.cats{display:flex;gap:6px;margin-left:auto;flex-wrap:wrap}
   nav.cats button{background:none;border:1px solid transparent;color:var(--walnut-2);font-size:13.5px;font-weight:500;padding:8px 14px;border-radius:999px;transition:.18s}
@@ -76,7 +77,7 @@
   .eyebrow{display:inline-flex;align-items:center;gap:10px;color:var(--moss-2);font-weight:600;font-size:12px;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:18px}
   .eyebrow::before{content:"";width:34px;height:1px;background:var(--gold)}
   .hero h1{font-size:clamp(40px,6.4vw,72px);line-height:1.02;margin:0 0 20px;color:var(--walnut);font-weight:600;letter-spacing:-.5px}
-  .hero h1 em{font-style:italic;color:var(--gold)}
+  .hero h1 em{font-family:'Charmonman',cursive;font-weight:700;font-style:normal;color:var(--gold);font-size:1.12em;display:inline-block}
   .hero p{font-size:18px;max-width:560px;color:var(--walnut-2);margin:0 0 28px}
   .hero .row{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
   .btn-solid{background:var(--walnut);color:var(--paper);border:none;border-radius:999px;padding:14px 26px;font-weight:600;font-size:15px;text-decoration:none;display:inline-flex;align-items:center;gap:9px;transition:.18s}
@@ -113,7 +114,7 @@
   footer.site{background:var(--walnut);color:var(--cream);padding:52px 0 34px;margin-top:auto}
   footer .cols{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:36px}
   @media(max-width:720px){footer .cols{grid-template-columns:1fr;gap:26px}}
-  footer .mark{font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:600;color:var(--paper);margin-bottom:10px}
+  footer .mark{font-family:'Jura',sans-serif;font-size:26px;font-weight:700;letter-spacing:.5px;color:var(--paper);margin-bottom:10px}
   footer p,footer a{font-size:13.5px;color:rgba(246,239,226,.72);text-decoration:none;margin:5px 0}
   footer a:hover{color:var(--gold-2)}
   footer a{display:block}
@@ -139,7 +140,7 @@
   /* cổng mật khẩu */
   #adminGate{position:fixed;inset:0;z-index:80;background:var(--cream);display:flex;align-items:center;justify-content:center;padding:20px}
   .gate{width:100%;max-width:360px;background:var(--paper);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:34px 30px;text-align:center}
-  .gate-mark{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:28px;color:var(--walnut)}
+  .gate-mark{font-family:'Jura',sans-serif;font-weight:700;letter-spacing:.5px;font-size:24px;color:var(--walnut)}
   .gate p{font-size:13.5px;color:var(--walnut-soft);margin:8px 0 20px}
   .gate .input{margin-bottom:10px;text-align:center}
   .gate-err{min-height:18px;font-size:12.5px;color:#a33;margin-bottom:8px}
@@ -150,7 +151,7 @@
   .admin{min-height:100vh;background:var(--cream)}
   .admin-top{background:var(--walnut);color:var(--cream);position:sticky;top:0;z-index:30}
   .admin-top .bar{height:64px}
-  .admin-top .mark{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;color:var(--paper)}
+  .admin-top .mark{font-family:'Jura',sans-serif;font-size:21px;font-weight:700;letter-spacing:.5px;color:var(--paper)}
   .admin-top .tag{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gold-2);margin-left:4px}
   .admin-top .tools{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}
   .abtn{background:rgba(246,239,226,.1);color:var(--cream);border:1px solid rgba(246,239,226,.2);border-radius:9px;padding:9px 14px;font-size:13px;font-weight:500;display:inline-flex;align-items:center;gap:7px}
@@ -193,7 +194,7 @@
   .prow:last-child{border-bottom:none}
   .prow .pim{width:60px;height:60px;border-radius:10px;object-fit:cover;background:var(--cream-2);border:1px solid var(--line);flex-shrink:0}
   .prow .pmeta{flex:1;min-width:0}
-  .prow .pmeta .n{font-family:'Cormorant Garamond',serif;font-size:21px;color:var(--walnut);font-weight:600;line-height:1.1}
+  .prow .pmeta .n{font-family:'Jura',sans-serif;font-size:17px;color:var(--walnut);font-weight:600;line-height:1.2}
   .prow .pmeta .m{font-size:12px;color:var(--walnut-soft);margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
   .prow .pact{display:flex;gap:8px}
   .minibtn{border:1px solid var(--line);background:var(--paper);border-radius:8px;padding:8px 12px;font-size:12.5px;font-weight:500;color:var(--walnut-2)}
@@ -203,7 +204,7 @@
   .ordrow{padding:16px 4px;border-bottom:1px solid var(--line)}
   .ordrow:last-child{border-bottom:none}
   .ordrow .ohead{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:8px}
-  .ordrow .oid{font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:var(--walnut)}
+  .ordrow .oid{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12.5px;color:var(--walnut)}
   .ordrow .odate{font-size:11.5px;color:var(--walnut-soft)}
   .ordrow .ocust{font-size:13.5px;color:var(--walnut-2);margin-bottom:8px;line-height:1.6}
   .ordrow .ocust b{color:var(--walnut)}
@@ -234,7 +235,7 @@
   .form-actions{display:flex;gap:12px;margin-top:24px;flex-wrap:wrap}
   .callout{background:rgba(108,122,76,.1);border:1px solid rgba(108,122,76,.3);border-radius:12px;padding:16px 18px;font-size:13px;color:var(--moss-2);margin-bottom:22px;line-height:1.6}
   .callout b{color:var(--walnut)}
-  .callout code{background:var(--cream-2);padding:1px 6px;border-radius:5px;font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--walnut)}
+  .callout code{background:var(--cream-2);padding:1px 6px;border-radius:5px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12px;color:var(--walnut)}
   .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(120%);background:var(--walnut);color:var(--cream);padding:14px 22px;border-radius:12px;font-size:14px;font-weight:500;z-index:100;transition:.3s;box-shadow:0 12px 40px -10px rgba(0,0,0,.5);max-width:88vw;text-align:center}
   .toast.show{transform:translateX(-50%) translateY(0)}
   .toast.ok{background:var(--moss-2)}.toast.err{background:#a33}
@@ -499,7 +500,7 @@ function seed(){
   cacheLocal();
 }
 function uid(){return 'p'+Date.now().toString(36)+Math.random().toString(36).slice(2,6);}
-function ph(c){const s=`<svg xmlns='http://www.w3.org/2000/svg' width='400' height='300'><rect width='400' height='300' fill='${c}'/><rect width='400' height='300' fill='#000' opacity='0.06'/><text x='50%' y='52%' font-family='serif' font-size='34' fill='#FBF6EC' text-anchor='middle' opacity='.85'>Mộc CNC</text></svg>`;return 'data:image/svg+xml;utf8,'+s.replace(/#/g,'%23').replace(/</g,'%3C').replace(/>/g,'%3E');}
+function ph(c){const s=`<svg xmlns='http://www.w3.org/2000/svg' width='400' height='300'><rect width='400' height='300' fill='${c}'/><rect width='400' height='300' fill='#000' opacity='0.06'/><text x='50%' y='52%' font-family='sans-serif' font-weight='600' font-size='32' fill='#FBF6EC' text-anchor='middle' opacity='.85'>Mộc CNC</text></svg>`;return 'data:image/svg+xml;utf8,'+s.replace(/#/g,'%23').replace(/</g,'%3C').replace(/>/g,'%3E');}
 function isNewImg(s){return typeof s==='string'&&s.startsWith('data:image/jpeg');}
 
 /* ---------- hiển thị trang công khai ---------- */
@@ -623,7 +624,7 @@ async function submitOrder(e){
     cart=[];saveCart();
     document.getElementById('cartMount').innerHTML=`<div class="overlay" onclick="closeCart()"><div class="modal cart-modal" style="position:relative">
       <button class="close" onclick="closeCart()" aria-label="Đóng">×</button>
-      <div class="cart-ok"><div class="ic">✓</div><h2 class="serif">Đặt hàng thành công</h2>
+      <div class="cart-ok"><div class="ic">✓</div><h2 class="script" style="font-size:32px;color:var(--walnut)">Đặt hàng thành công</h2>
       <p>Mã đơn: <b class="mono">${esc(d.orderId)}</b><br>Xưởng sẽ gọi điện xác nhận trước khi giao. Cảm ơn bạn đã ủng hộ Mộc CNC.</p>
       <button class="btn-solid" onclick="closeCart()">Đóng</button></div>
     </div></div>`;
