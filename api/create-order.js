@@ -8,7 +8,7 @@ function parsePriceVN(s) {
 }
 
 async function fetchProducts() {
-  const r = await fetch('https://hoangmoc.vercel.app/data.json', { cache: 'no-store' });
+  const r = await fetch('https://moccnc.vercel.app/data.json', { cache: 'no-store' });
   if (!r.ok) throw new Error('Không tải được danh sách sản phẩm để xác thực đơn hàng');
   const j = await r.json();
   return j.products || [];
