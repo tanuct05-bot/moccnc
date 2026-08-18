@@ -29,7 +29,7 @@
     {
       "id": "pmrd7ycohk005",
       "name": "Bàn trà gỗ sồi mộc",
-      "cat": "Bàn trà",
+      "cat": "",
       "price": "2.900.000₫",
       "url": "https://shopee.vn/hm_interior",
       "desc": "Bàn trà mặt liền gỗ sồi, chân tháo lắp. Hoàn thiện dầu tự nhiên giữ vân gỗ thật.",
@@ -42,10 +42,6 @@
   "categories": [
     {
       "name": "Khay gỗ",
-      "parent": null
-    },
-    {
-      "name": "Bàn trà",
       "parent": null
     },
     {
